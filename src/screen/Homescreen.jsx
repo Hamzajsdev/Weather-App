@@ -1,7 +1,6 @@
 import {
   Dimensions,
   Image,
-  KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -9,7 +8,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -36,7 +34,6 @@ const Homescreen = () => {
   const [loading, setLoading] = useState(true);
 
   const handleLocation = loc => {
-    console.log(loc);
     setLocation([]);
     setShowSearch(false);
     setLoading(true);
@@ -78,13 +75,11 @@ const Homescreen = () => {
   const {current, location} = weather;
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}>
-      <TouchableWithoutFeedback>
+
         <View style={{flex: 1}}>
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
-            keyboardShouldPersistTaps="handled"
+            // keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
               <StatusBar style="light" backgroundColor={'#0F3438'} />
@@ -217,7 +212,8 @@ const Homescreen = () => {
                     <ScrollView
                       horizontal
                       contentContainerStyle={{paddingHorizontal: 15}}
-                      showsHorizontalScrollIndicator={false}>
+                      showsHorizontalScrollIndicator={false}
+                      >
                       {weather?.forecast?.forecastday?.map((item, index) => {
                         let date = new Date(item.date);
                         let options = {weekday: 'long'};
@@ -242,6 +238,7 @@ const Homescreen = () => {
                           </View>
                         );
                       })}
+                    
                     </ScrollView>
                   </View>
                 </SafeAreaView>
@@ -249,8 +246,7 @@ const Homescreen = () => {
             </View>
           </ScrollView>
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+  
   );
 };
 
